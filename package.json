@@ -1,0 +1,20 @@
+{
+  "name": "vsqleague",
+  "version": "1.0.0",
+  "description": "League management application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "keywords": [
+    "league",
+    "sports",
+    "management"
+  ],
+  "author": "",
+  "license": "MIT"
+}
