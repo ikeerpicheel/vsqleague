@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSQ League</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* FORCE NEWS VISIBILITY - EMERGENCY FIX */
+        .news-container {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 999 !important;
+        }
+        .news-item {
+            background: #8a2be2 !important;
+            color: white !important;
+            padding: 20px !important;
+            margin: 20px 0 !important;
+            border: 3px solid white !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        .news-item h3 {
+            color: white !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+        }
+        .news-date {
+            color: #000 !important;
+            background: white !important;
+            padding: 5px 10px !important;
+            border-radius: 10px !important;
+            display: inline-block !important;
+            margin-bottom: 10px !important;
+        }
+        .news-preview {
+            color: #ddd !important;
+            font-style: italic !important;
+        }
+        
+        /* NEW MAIN PAGE STYLES */
+        .main-hero {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(75, 0, 130, 0.6));
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            border: 2px solid #8a2be2;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin: 0;
+        }
+        .main-news-section {
+            margin: 2rem 0;
+        }
+        .main-news-title {
+            font-size: 2rem;
+            color: #8a2be2;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+        }
+        .quick-info-section {
+            margin-top: 3rem;
+        }
+        .quick-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .info-card {
+            background: rgba(138, 43, 226, 0.4);
+            border: 2px solid #8a2be2;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .info-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .info-card p {
+            color: #ddd;
+            margin: 0.5rem 0;
+        }
+        
+        /* FOOTER STYLES */
+        .main-footer {
+            background: rgba(138, 43, 226, 0.8);
+            border-top: 2px solid #8a2be2;
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .copyright p, .sponsor p {
+            color: white;
+            margin: 0;
+            font-size: 1rem;
+        }
+        .sponsor strong {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="banner-content">
+            <div class="logo-container">
+                <img src="/logo-vsq.png" alt="VSQ League Logo" class="logo-image">
+                <div class="logo-text">LEAGUE F1</div>
+            </div>
+            <div class="social-links">
+                <a href="https://instagram.com/vsqleaguef1" target="_blank" class="social-icon" title="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://tiktok.com/@vsqleaguef1" target="_blank" class="social-icon" title="TikTok">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h1>VSQ League</h1>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#standings">Clasificación</a></li>
+                <li><a href="#schedule">Calendario</a></li>
+                <li><a href="#teams">Equipos</a></li>
+            </ul>
+        </nav>
+        <div id="back-nav" style="display: none;">
+            <button id="back-button" class="back-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Volver al Inicio
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="active">
+            <!-- PORTADA PRINCIPAL CON NOTICIAS -->
+            <div class="main-hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">VSQ League F1 - Season 7</h1>
+                    <p class="hero-subtitle">🏁 La nueva temporada comienza el 19 de Septiembre - Viernes 22:00h</p>
+                </div>
+            </div>
+
+            <!-- NOTICIAS PRINCIPALES -->
+            <div class="main-news-section">
+                <h2 class="main-news-title">📰 Últimas Noticias</h2>
+                <div class="news-container">
+                    <article class="news-item" onclick="toggleNews(this)">
+                        <div class="news-date">10 de Septiembre, 2025</div>
+                        <h3>Llega la Season 7 a la VSQ League</h3>
+                        <p class="news-preview">Una nueva temporada llega con grandes expectativas y sorpresas...</p>
+                        <div class="news-full" style="display: none;">
+                            <p>Después de seis temporadas llenas de emociones, batallas épicas y momentos inolvidables, la VSQ League se prepara para dar inicio a su séptima edición. Esta nueva temporada promete ser la más competitiva hasta la fecha, con un calendario de 12 grandes premios que llevará a los pilotos por los circuitos más icónicos del mundo.</p>
+                            <p>La Season 7 trae consigo nuevas regulaciones, una parrilla renovada y la promesa de luchar por el título más disputado de la liga. Con Austria como punto de partida el próximo 19 de septiembre, los 20 pilotos están listos para escribir un nuevo capítulo en la historia de la VSQ League.</p>
+                            <p>¿Quién se alzará como campeón de esta nueva era? La respuesta llegará tras 12 viernes de pura adrenalina a las 22:00 hora española.</p>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item" onclick="toggleNews(this)">
+                        <div class="news-date">8 de Septiembre, 2025</div>
+                        <h3>Josito en busca del 2º junto al 3 veces campeón</h3>
+                        <p class="news-preview">El piloto de Mercedes busca su segundo título en una temporada cargada de expectación...</p>
+                        <div class="news-full" style="display: none;">
+                            <p>Josito llega a la Season 7 con hambre de victoria tras haber conquistado su primer campeonato en temporadas anteriores. El talentoso piloto de Mercedes se enfrentará a un desafío monumental: competir contra un tricampeón que busca ampliar su leyenda en la VSQ League.</p>
+                            <p>La dupla de Mercedes, formada por Josito y S.Piñero, representa una de las amenazas más serias para el título. Con un coche competitivo y la experiencia adquirida en campañas pasadas, Josito ha demostrado que tiene lo necesario para luchar en la élite.</p>
+                            <p>"Este año vengo más preparado que nunca", declaró Josito en la conferencia de prensa previa al inicio de temporada. "Sabemos que el nivel será altísimo, pero tengo confianza en el equipo y en mis habilidades. El objetivo es claro: conquistar mi segundo título mundial."</p>
+                            <p>La pregunta que ronda en el paddock es si Josito podrá mantener la consistencia necesaria para batir al tricampeón en una temporada que promete ser la más reñida de la historia.</p>
+                        </div>
+                    </article>
+                    
+                    <article class="news-item" onclick="toggleNews(this)">
+                        <div class="news-date">5 de Septiembre, 2025</div>
+                        <h3>Caras nuevas y viejos conocidos</h3>
+                        <p class="news-preview">La parrilla de la Season 7 combina experiencia y frescura en una mezcla explosiva...</p>
+                        <div class="news-full" style="display: none;">
+                            <p>La Season 7 de la VSQ League presenta una parrilla fascinante que mezcla a la perfección veteranos experimentados con talentos emergentes que buscan hacer su marca en la competición más prestigiosa de la liga.</p>
+                            <p>Entre los veteranos destacan nombres legendarios como Eloy, que llega con la experiencia de múltiples campañas y la determinación intacta de seguir luchando por victorias. Xdead, conocido por su agresividad en pista y su capacidad para sacar el máximo rendimiento en momentos cruciales, también regresa para otra temporada de emociones.</p>
+                            <p>Las caras nuevas aportan aire fresco y hambre de triunfo. Pilotos como Druchi y Emi en Aston Martin llegan con ganas de demostrar que pueden competir al más alto nivel, mientras que la dupla de Williams con MrPopcorn y Vicotr busca sorprender a propios y extraños.</p>
+                            <p>Esta combinación de experiencia y juventud promete crear una dinámica única en pista, donde cada carrera puede deparar sorpresas y cada punto será crucial en la lucha por el campeonato. La Season 7 no solo será una batalla por la velocidad, sino también una demostración de cómo la experiencia y la frescura pueden convivir en la alta competición.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- INFO RÁPIDA -->
+            <div class="quick-info-section">
+                <div class="quick-info-grid">
+                    <div class="info-card">
+                        <h3>📅 Próxima Carrera</h3>
+                        <p><strong>Gran Premio de Austria</strong></p>
+                        <p>Viernes 19 Sept - 22:00h</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🏆 Temporada</h3>
+                        <p><strong>Season 7</strong></p>
+                        <p>12 Grandes Premios</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🏎️ Equipos</h3>
+                        <p><strong>10 Equipos</strong></p>
+                        <p>20 Pilotos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+                                <!-- Africa -->
+                        <path d="M480,140 L500,135 L520,140 L540,148 L560,160 L575,180 L580,200 L585,220 L580,240 L575,260 L570,280 L560,300 L545,315 L525,325 L505,330 L485,328 L465,325 L450,315 L440,300 L435,280 L438,260 L442,240 L448,220 L455,200 L462,180 L470,160 Z" 
+                              fill="url(#landGradient)" stroke="#8a2be2" stroke-width="1" opacity="0.9"/>
+                        
+                        <!-- Asia -->
+                        <path d="M580,80 L620,75 L660,80 L700,85 L740,90 L780,95 L820,100 L850,110 L870,125 L880,140 L875,155 L870,170 L860,185 L845,195 L825,200 L805,202 L785,200 L765,195 L745,185 L725,170 L710,155 L700,140 L695,125 L692,110 L690,95 L688,80 Z" 
+                              fill="url(#landGradient)" stroke="#8a2be2" stroke-width="1" opacity="0.9"/>
+                        
+                        <!-- Australia -->
+                        <path d="M780,350 L820,345 L860,350 L890,360 L910,375 L920,395 L915,415 L905,430 L890,440 L870,445 L850,442 L830,438 L810,430 L795,415 L785,395 L780,375 Z" 
+                              fill="url(#landGradient)" stroke="#8a2be2" stroke-width="1" opacity="0.9"/>
+                        
+                        <!-- Circuit Markers -->
+                        <circle class="circuit-marker" cx="510" cy="100" r="8" fill="#8a2be2" 
+                                data-flag="🇦🇹" data-name="Red Bull Ring" data-track="Austria - Spielberg"/>
+                        
+                        <circle class="circuit-marker" cx="180" cy="200" r="8" fill="#8a2be2" 
+                                data-flag="🇺🇸" data-name="Circuit of the Americas" data-track="COTA - Austin, Texas"/>
+                        
+                        <circle class="circuit-marker" cx="490" cy="130" r="8" fill="#8a2be2" 
+                                data-flag="🇮🇹" data-name="Autodromo di Monza" data-track="Monza - Italia"/>
+                        
+                        <circle class="circuit-marker" cx="470" cy="115" r="8" fill="#8a2be2" 
+                                data-flag="🇲🇨" data-name="Circuit de Monaco" data-track="Mónaco - Monte Carlo"/>
+                        
+                        <circle class="circuit-marker" cx="120" cy="220" r="8" fill="#8a2be2" 
+                                data-flag="🇺🇸" data-name="Las Vegas Strip Circuit" data-track="Las Vegas - Nevada"/>
+                        
+                        <circle class="circuit-marker" cx="800" cy="140" r="8" fill="#8a2be2" 
+                                data-flag="🇯🇵" data-name="Suzuka Circuit" data-track="Suzuka - Japón"/>
+                        
+                        <circle class="circuit-marker" cx="440" cy="140" r="8" fill="#8a2be2" 
+                                data-flag="🇪🇸" data-name="Circuit de Barcelona" data-track="Catalunya - España"/>
+                        
+                        <circle class="circuit-marker" cx="750" cy="120" r="8" fill="#8a2be2" 
+                                data-flag="🇸🇬" data-name="Marina Bay Circuit" data-track="Singapur - Marina Bay"/>
+                        
+                        <circle class="circuit-marker" cx="430" cy="120" r="8" fill="#8a2be2" 
+                                data-flag="🇬🇧" data-name="Silverstone Circuit" data-track="Silverstone - Reino Unido"/>
+                        
+                        <circle class="circuit-marker" cx="850" cy="390" r="8" fill="#8a2be2" 
+                                data-flag="🇦🇺" data-name="Albert Park Circuit" data-track="Melbourne - Australia"/>
+                        
+                        <circle class="circuit-marker" cx="160" cy="150" r="8" fill="#8a2be2" 
+                                data-flag="🇨🇦" data-name="Circuit Gilles Villeneuve" data-track="Montreal - Canadá"/>
+                        
+                        <circle class="circuit-marker" cx="320" cy="380" r="8" fill="#8a2be2" 
+                                data-flag="🇧🇷" data-name="Autódromo José Carlos Pace" data-track="Interlagos - Brasil"/>
+                    </svg>
+                    
+                    <!-- Interactive Tooltip -->
+                    <div id="circuit-tooltip" class="circuit-tooltip">
+                        <div class="tooltip-flag"></div>
+                        <div class="tooltip-name"></div>
+                        <div class="tooltip-track"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="race-schedule">
+                <h3>Grandes Premios - Temporada 2025</h3>
+                <div class="races-grid">
+                    <div class="race-item">
+                        <div class="race-flag">🇦🇹</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Austria</h4>
+                            <p>Jornada 1 - Viernes 19 Sep, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇺🇸</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de COTA (EEUU)</h4>
+                            <p>Jornada 2 - Viernes 26 Sep, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇮🇹</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Monza</h4>
+                            <p>Jornada 3 - Viernes 3 Oct, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇲🇨</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Mónaco</h4>
+                            <p>Jornada 4 - Viernes 10 Oct, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇺🇸</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Las Vegas</h4>
+                            <p>Jornada 5 - Viernes 17 Oct, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇯🇵</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Japón</h4>
+                            <p>Jornada 6 - Viernes 24 Oct, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇪🇸</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de España</h4>
+                            <p>Jornada 7 - Viernes 31 Oct, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇸🇬</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Singapur</h4>
+                            <p>Jornada 8 - Viernes 7 Nov, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇬🇧</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Silverstone</h4>
+                            <p>Jornada 9 - Viernes 14 Nov, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇦🇺</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Australia</h4>
+                            <p>Jornada 10 - Viernes 21 Nov, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇨🇦</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Canadá</h4>
+                            <p>Jornada 11 - Viernes 28 Nov, 22:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="race-item">
+                        <div class="race-flag">🇧🇷</div>
+                        <div class="race-info">
+                            <h4>Gran Premio de Brasil</h4>
+                            <p>Jornada 12 - Viernes 5 Dic, 22:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="teams">
+            <h2>Equipos F1 2025</h2>
+            <div class="teams-grid">
+                <div class="team-card" data-team="team1" style="--team-color: #DC143C;">
+                    <h3>Ferrari</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Eloy</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Zompei</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team2" style="--team-color: #1E41FF;">
+                    <h3>Red Bull</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Xdead</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Zambrana</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team3" style="--team-color: #00D2BE;">
+                    <h3>Mercedes</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Josito</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">S.Piñero</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team4" style="--team-color: #FF8700;">
+                    <h3>McLaren</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Libre</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Serjo</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team5" style="--team-color: #2B4562;">
+                    <h3>Alpine</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Xrnm</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">ElDembow</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team6" style="--team-color: #6692FF;">
+                    <h3>RB Visa Cash App</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Marco</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Carlos</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team7" style="--team-color: #FFFFFF;">
+                    <h3>Haas</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Margulio</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Walter</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team8" style="--team-color: #52C832;">
+                    <h3>Kick Sauber</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Jose</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Isaac</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team9" style="--team-color: #229971;">
+                    <h3>Aston Martin</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">Druchi</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Emi</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-team="team10" style="--team-color: #005AFF;">
+                    <h3>Williams</h3>
+                    <div class="team-color-bar"></div>
+                    <div class="drivers-info" style="display: none;">
+                        <div class="driver">
+                            <div class="driver-name">MrPopcorn</div>
+                        </div>
+                        <div class="driver">
+                            <div class="driver-name">Vicotr</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="copyright">
+                <p>© 2025 VSQ League F1. Todos los derechos reservados.</p>
+            </div>
+            <div class="sponsor">
+                <p>Patrocinado por <strong>Grid Finder</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
