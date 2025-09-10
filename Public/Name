@@ -1,0 +1,3 @@
+git mv Public public
+git commit -m "rename Public to public"
+git push
